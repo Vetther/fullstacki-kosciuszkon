@@ -5,7 +5,7 @@ export default function Card({
   className,
 }: Children & { className?: string }) {
   return (
-    <div className={cn("flex-1 rounded-md bg-white p-4 shadow-md", className)}>
+    <div className={cn("flex-1 rounded-md bg-white p-4", className)}>
       {children}
     </div>
   )

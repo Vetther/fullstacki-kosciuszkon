@@ -1,3 +1,3 @@
 export default function Main({ children }: Children) {
-  return <main className="h-screen bg-[#EBECEE]">{children}</main>
+  return <main className="min-h-screen bg-[#EBECEE]">{children}</main>
 }
