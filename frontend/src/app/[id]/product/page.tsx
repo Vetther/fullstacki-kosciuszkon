@@ -25,6 +25,7 @@ const mockProduct = {
     { name: "Nikiel", amount: 1 },
   ],
   carbonFootprint: 40,
+  harmfulSubstances: ["Ni"],
 }
 
 export default function Product() {
@@ -107,10 +108,16 @@ export default function Product() {
             <h3 className="text-center">
               Zawartość substancji niebezpiecznych
             </h3>
-            <div className="text-2xl">
-              <span className="text-red-700">TAK</span>
+            <div className="text-center text-2xl">
+              <span className="text-red-700">
+                {mockProduct.harmfulSubstances.length !== 0 ? "TAK" : "NIE"}
+              </span>
               <br />
-              <span className="text-red-700">(Ni)</span>
+              <span className="text-red-700">
+                {mockProduct.harmfulSubstances.length !== 0
+                  ? `(${mockProduct.harmfulSubstances.join(", ")})`
+                  : "Brak"}
+              </span>
             </div>
           </Card>
         </div>
