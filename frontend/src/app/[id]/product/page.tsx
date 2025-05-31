@@ -1,5 +1,6 @@
 import Card from "../_components/Card"
 import Image from "next/image"
+import Sub from "~/components/Sub"
 import { Separator } from "~/components/ui/separator"
 
 const mockProduct = {
@@ -18,6 +19,13 @@ const mockProduct = {
   voltage: { key: "Napięcie nominalne", value: "20 V" },
   weight: { key: "Masa baterii", value: "51 g" },
   size: { key: "Wymiary baterii", value: "1.5m x 1m x 1.5m" },
+  materials: [
+    { name: "Lit", amount: 2 },
+    { name: "Kobalt", amount: 3 },
+    { name: "Nikiel", amount: 1 },
+  ],
+  carbonFootprint: 40,
+  harmfulSubstances: ["Ni"],
 }
 
 export default function Product() {
@@ -75,6 +83,45 @@ export default function Product() {
           ))}
         </div>
       </Card>
+      <div className="flex gap-4">
+        <Card className="flex-1">
+          <h3 className="text-lg">Recycling</h3>
+          <ul>
+            {mockProduct.materials.map(material => (
+              <li key={material.name} className="grid grid-cols-2">
+                <span className="text-muted-foreground">{material.name}</span>
+                <span>{material.amount}%</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+        <div className="flex-1 space-y-4">
+          <Card className="grid place-items-center gap-4">
+            <h3 className="text-center">
+              Ślad węglowy (CO<Sub>2</Sub>)
+            </h3>
+            <span className="w-full text-center text-2xl">
+              {mockProduct.carbonFootprint} CO<Sub>2</Sub>e
+            </span>
+          </Card>
+          <Card className="grid place-items-center gap-4">
+            <h3 className="text-center">
+              Zawartość substancji niebezpiecznych
+            </h3>
+            <div className="text-center text-2xl">
+              <span className="text-red-700">
+                {mockProduct.harmfulSubstances.length !== 0 ? "TAK" : "NIE"}
+              </span>
+              <br />
+              <span className="text-red-700">
+                {mockProduct.harmfulSubstances.length !== 0
+                  ? `(${mockProduct.harmfulSubstances.join(", ")})`
+                  : "Brak"}
+              </span>
+            </div>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }
