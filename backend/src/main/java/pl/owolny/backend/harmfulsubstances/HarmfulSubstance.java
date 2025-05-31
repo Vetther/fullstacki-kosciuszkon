@@ -1,11 +1,9 @@
 package pl.owolny.backend.harmfulsubstances;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import pl.owolny.backend.harmfulsubstances.vo.HarmfulSubstanceId;
+import pl.owolny.backend.product.Product;
 
 @Entity
 @Getter
@@ -17,10 +15,15 @@ public class HarmfulSubstance {
 
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
+
     public HarmfulSubstance() {}
 
-    public HarmfulSubstance(String name) {
+    public HarmfulSubstance(String name, Product product) {
         this.id = HarmfulSubstanceId.generate();
         this.name = name;
+        this.product = product;
     }
 }
