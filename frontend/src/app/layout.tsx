@@ -1,3 +1,4 @@
+import Footer from "./_components/Footer"
 import Main from "./_components/Main"
 import Navbar from "./_components/Navbar"
 import { type Metadata } from "next"
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: Children) {
         <TRPCReactProvider>
           <Navbar />
           <Main>{children}</Main>
+          <Footer />
         </TRPCReactProvider>
       </body>
     </html>
