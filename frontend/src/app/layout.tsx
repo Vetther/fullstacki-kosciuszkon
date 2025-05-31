@@ -10,7 +10,7 @@ export const metadata: Metadata = {}
 export default function RootLayout({ children }: Children) {
   return (
     <html lang="en">
-      <body className="bg-bg text-white">
+      <body className="bg-bg">
         <TRPCReactProvider>
           <Navbar />
           <Main>{children}</Main>

@@ -40,7 +40,7 @@ const tabs: Tab[] = [
 
 export default function Footer() {
   return (
-    <footer className="bg-bg sticky bottom-0 flex items-center justify-between px-6 py-4">
+    <footer className="bg-bg sticky bottom-0 flex items-center justify-between px-6 py-4 text-white">
       {tabs.map(tab => (
         <Button key={tab.name} variant="ghost" className="flex-col" asChild>
           <Link href="/">
