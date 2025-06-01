@@ -39,3 +39,4 @@ out/
 .vscode/
 .id.json
 __pycache__/
+node_modules/
