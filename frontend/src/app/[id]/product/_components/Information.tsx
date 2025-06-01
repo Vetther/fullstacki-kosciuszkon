@@ -3,21 +3,21 @@ import Card from "../../_components/Card"
 type InformationProps = {
   capacity: string
   voltage: string
-  weight: string
-  size: string
+  mass: string
+  dimensions: string
 }
 
 export default function Information({
   capacity,
   voltage,
-  weight,
-  size,
+  mass,
+  dimensions,
 }: InformationProps) {
   const info = [
     { key: "Pojemność nominalna", value: capacity },
     { key: "Napięcie nominalne", value: voltage },
-    { key: "Masa baterii", value: weight },
-    { key: "Wymiary baterii", value: size },
+    { key: "Masa baterii", value: mass },
+    { key: "Wymiary baterii", value: dimensions },
   ]
 
   return (

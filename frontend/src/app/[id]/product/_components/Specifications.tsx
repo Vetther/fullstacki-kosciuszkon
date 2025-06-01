@@ -4,9 +4,9 @@ import { Separator } from "~/components/ui/separator"
 type SpecificationProps = {
   name: string
   model: string
-  type: string
+  category: string
   id: string
-  producer: string
+  manufacturer: string
   dateOfProduction: string
   placeOfProduction: string
   dateOfInstallation: string
@@ -16,9 +16,9 @@ type SpecificationProps = {
 export default function Specifications({
   name,
   model,
-  type,
+  category,
   id,
-  producer,
+  manufacturer,
   dateOfProduction,
   placeOfProduction,
   dateOfInstallation,
@@ -26,7 +26,7 @@ export default function Specifications({
 }: SpecificationProps) {
   const info = [
     { key: "Identyfikator", value: id },
-    { key: "Producent", value: producer },
+    { key: "Producent", value: manufacturer },
     { key: "Data produckji", value: dateOfProduction },
     { key: "Kraj produkcji", value: placeOfProduction },
     { key: "Data instalacji", value: dateOfInstallation },
@@ -40,7 +40,7 @@ export default function Specifications({
           <span className="text-muted-foreground text-sm">{model}</span>
         </div>
         <span className="h-min rounded-md bg-[#CFDCE1] p-1.5 text-sm">
-          {type}
+          {category}
         </span>
       </div>
       <Separator />
