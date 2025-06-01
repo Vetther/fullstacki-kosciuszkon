@@ -1,6 +1,6 @@
-import Card from "../_components/Card"
 import { mockProduct } from "../mock"
 import CarbonFootprint from "./_components/CarbonFootprint"
+import HarmfulSubstance from "./_components/HarmfulSubstance"
 import ProductImage from "./_components/Image"
 import Information from "./_components/Information"
 import Recycling from "./_components/Recycling"
@@ -31,22 +31,7 @@ export default function Product() {
         <Recycling materials={mockProduct.materials} />
         <div className="flex flex-1 flex-col space-y-4">
           <CarbonFootprint carbonFootprint={mockProduct.carbonFootprint} />
-          <Card className="flex flex-col justify-center gap-4">
-            <h3 className="text-center">
-              Zawartość substancji niebezpiecznych
-            </h3>
-            <div className="text-center text-2xl">
-              <span className="text-red-700">
-                {mockProduct.harmfulSubstances.length !== 0 ? "TAK" : "NIE"}
-              </span>
-              <br />
-              <span className="text-red-700">
-                {mockProduct.harmfulSubstances.length !== 0
-                  ? `(${mockProduct.harmfulSubstances.join(", ")})`
-                  : "Brak"}
-              </span>
-            </div>
-          </Card>
+          <HarmfulSubstance harmfulSubstances={mockProduct.harmfulSubstances} />
         </div>
       </div>
     </div>
