@@ -49,14 +49,14 @@ public class BackendApplication {
             Product product = productService.createProduct(new ProductDto(
                     "00000000-0000-0000-0000-000000000000",
                     "https://cdn.discordapp.com/attachments/1378296266286567476/1378663596610818069/image_8.png?ex=683d6c07&is=683c1a87&hm=dd2827e7be3d1dd69bce1b2e2ae153390dc9a48b551e2d3ea45729a9ce1b99cd&",
-                    "Example Product",
-                    "Model X",
+                    "Bateria EV",
+                    "Model 53A3MED",
                     ProductCategory.BATTERY,
-                    new ProductBaseInfo("manufacturer", "France", LocalDate.now(), LocalDate.now().plusYears(1), "1234567890"),
-                    "5000mAh",
-                    "3.7V",
-                    "200g",
-                    "10cm x 5cm x 2cm",
+                    new ProductBaseInfo("KiaMotors", "France", LocalDate.now(), LocalDate.now().plusYears(1), "Audi e-tron GT (2023)"),
+                    "500mAh",
+                    "20V",
+                    "250kg",
+                    "1m x 3m x 1m",
                     50
             ));
             harmfulSubstanceService.createHarmfulSubstance(
@@ -66,8 +66,15 @@ public class BackendApplication {
                     ));
             recycledMaterialService.createRecycledMaterial(
                     new RecycledMaterialDto(
-                            "Material A",
+                            "Lit",
                             4,
+                            product.getId().getValue().toString()
+                    )
+            );
+            recycledMaterialService.createRecycledMaterial(
+                    new RecycledMaterialDto(
+                            "Kobalt",
+                            2,
                             product.getId().getValue().toString()
                     )
             );
@@ -79,9 +86,10 @@ public class BackendApplication {
                     ShipmentStatus.PREPARING,
                     product.getId().getValue().toString(),
                     List.of(
-                            new ShipmentStageCreateRequest("Stage 1", "desc"),
-                            new ShipmentStageCreateRequest("Stage 2", "desc"),
-                            new ShipmentStageCreateRequest("Stage 3", "desc")
+                            new ShipmentStageCreateRequest("Wysyłka: Niemcy", "desc"),
+                            new ShipmentStageCreateRequest("Odbiór w magazynie", "desc"),
+                            new ShipmentStageCreateRequest("Wysyłka: Polska 3", "desc"),
+                            new ShipmentStageCreateRequest("Odbiór w magazynie", "desc")
                     )
             ));
 //            String hash = productService.generateProductHash(product);
