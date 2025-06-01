@@ -21,4 +21,6 @@ export const mockProduct = {
   ],
   carbonFootprint: 40,
   harmfulSubstances: ["Ni"],
+  currentCapacity: "42 Ah",
+  predictedLife: "1-2 lat",
 }
