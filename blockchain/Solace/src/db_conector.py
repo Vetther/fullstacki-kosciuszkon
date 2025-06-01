@@ -14,7 +14,7 @@ from solana.rpc.commitment import Confirmed
 PROGRAM_ID = Pubkey.from_string("2J6wot16kg2KYDgEUk7H3RWWaQsidKKBtVuBMRvzxiog")
 SPACE = 8 + 4 + 280
 LAMPORTS = 1_000_000
-
+PRIVATE_KEY_PATH = "../id.json"
 
 def anchor_discriminator(name: str) -> bytes:
     return hashlib.sha256(f"global:{name}".encode()).digest()[:8]
@@ -30,7 +30,7 @@ def save_value_to_account(url: str, string_to_store: str):
     client = Client(url)
 
     # Klucze
-    with open("id.json", "r") as f:
+    with open(PRIVATE_KEY_PATH, "r") as f:
         secret_key = json.load(f)  # ← to jest lista liczb
         payer = Keypair.from_bytes(bytes(secret_key))  # ← zamieniamy na bytes
     base_account = Keypair()
