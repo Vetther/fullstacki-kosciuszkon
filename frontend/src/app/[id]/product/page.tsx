@@ -38,7 +38,7 @@ export default async function Product({
         <Recycling productId={id} />
         <div className="flex flex-1 flex-col space-y-4">
           <CarbonFootprint carbonFootprint={product.carbonFootprintValue} />
-          {/* <HarmfulSubstance harmfulSubstances={product.harmfulSubstances} /> */}
+          <HarmfulSubstance productId={id} />
         </div>
       </div>
     </div>
