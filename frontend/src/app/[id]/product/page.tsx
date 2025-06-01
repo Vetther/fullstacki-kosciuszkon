@@ -1,6 +1,6 @@
 import Card from "../_components/Card"
 import { mockProduct } from "../mock"
-import Image from "next/image"
+import ProductImage from "./_components/Image"
 import PieDonutChart from "~/components/PieDonutChart"
 import Sub from "~/components/Sub"
 import { Separator } from "~/components/ui/separator"
@@ -8,14 +8,7 @@ import { Separator } from "~/components/ui/separator"
 export default function Product() {
   return (
     <div className="space-y-4">
-      <Card className="relative aspect-[4/3]">
-        <Image
-          src={mockProduct.img}
-          alt={mockProduct.imgAlt}
-          fill
-          className="object-contain"
-        />
-      </Card>
+      <ProductImage img={mockProduct.img} alt={mockProduct.imgAlt} />
       <Card className="space-y-4">
         <div className="flex justify-between">
           <div>
