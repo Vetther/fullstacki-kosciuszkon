@@ -30,7 +30,7 @@ public class Shipment {
     @Enumerated(EnumType.STRING)
     private ShipmentStatus type;
 
-    @OneToMany
+    @OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ShipmentStage> stages = new ArrayList<>(); // Lista etapów przesyłki
 
     @OneToOne(fetch = FetchType.LAZY)
