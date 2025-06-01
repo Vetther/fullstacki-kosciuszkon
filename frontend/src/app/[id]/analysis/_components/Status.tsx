@@ -1,13 +1,32 @@
 import Card from "../../_components/Card"
 import { TiTick } from "react-icons/ti"
 import { cn } from "~/lib/utils"
+import { api } from "~/trpc/server"
 
 type StatusProps = {
-  currentStage: number
-  stages: string[]
+  productId: string
 }
 
-export default function Status({ currentStage, stages }: StatusProps) {
+// const stages = [
+//   "W przygotowaniu", // PREPARING
+//   "Oczekuje na odbiór",  // READY_FOR_PICKUP
+//   "W drodze", //
+//   "Dostarczono do magazynu", // DELIVERED
+//   "Dostarczono do klienta", // RETURNED
+// ]
+
+const stages = [
+  { status: "PREPARING", description: "W przygotowaniu" },
+  { status: "READY_FOR_PICKUP", description: "Oczekuje na odbiór" },
+  { status: "IN_TRANSIT", description: "W drodze" },
+  { status: "DELIVERED", description: "Dostarczono do magazynu" },
+  { status: "RETURNED", description: "Dostarczono do klienta" },
+]
+
+export default async function Status({ productId }: StatusProps) {
+  const { type } = await api.shipment.getByProduct(productId)
+  const currentStageIndex = stages.findIndex(stage => stage.status === type)
+
   return (
     <Card className="space-y-4">
       <h3 className="text-xl">Stan produktu</h3>
@@ -15,16 +34,18 @@ export default function Status({ currentStage, stages }: StatusProps) {
         {stages.map((stage, i) => (
           <li key={i} className="flex items-center justify-between">
             <span
-              className={i === currentStage ? "text-black" : "text-tick-text"}
+              className={
+                i === currentStageIndex ? "text-black" : "text-tick-text"
+              }
             >
-              {stage}
+              {stage.description}
             </span>
-            {i <= currentStage && (
+            {i <= currentStageIndex && (
               <span className="p-1">
                 <TiTick
                   className={cn(
                     "rounded-full",
-                    i === currentStage
+                    i === currentStageIndex
                       ? "bg-tick text-white"
                       : "text-tick-text bg-[#E3E3E3]",
                   )}
