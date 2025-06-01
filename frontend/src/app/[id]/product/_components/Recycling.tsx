@@ -1,11 +1,14 @@
 import Card from "../../_components/Card"
 import PieDonutChart from "~/components/PieDonutChart"
+import { api } from "~/trpc/server"
 
 type RecyclingProps = {
-  materials: { name: string; amount: number }[]
+  productId: string
 }
 
-export default function Recycling({ materials }: RecyclingProps) {
+export default async function Recycling({ productId }: RecyclingProps) {
+  const materials = await api.recycledMaterials.getByProduct(productId)
+
   return (
     <Card className="flex flex-1 flex-col">
       <h3 className="text-lg">Recycling</h3>
@@ -15,7 +18,7 @@ export default function Recycling({ materials }: RecyclingProps) {
             <span className="text-muted-foreground before:pr-2 before:content-['•']">
               {material.name}
             </span>
-            <span>{material.amount}%</span>
+            <span>{material.quantityPercentage}%</span>
           </li>
         ))}
       </ul>

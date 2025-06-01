@@ -35,7 +35,7 @@ export default async function Product({
         dimensions={product.dimensions}
       />
       <div className="flex gap-4">
-        {/* <Recycling materials={product.materials} /> */}
+        <Recycling productId={id} />
         <div className="flex flex-1 flex-col space-y-4">
           <CarbonFootprint carbonFootprint={product.carbonFootprintValue} />
           {/* <HarmfulSubstance harmfulSubstances={product.harmfulSubstances} /> */}
