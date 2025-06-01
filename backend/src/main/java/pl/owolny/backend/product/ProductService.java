@@ -3,7 +3,7 @@ package pl.owolny.backend.product;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.owolny.backend.harmfulsubstances.HarmfulSubstanceRepository;
+import org.springframework.web.client.RestClient;
 import pl.owolny.backend.hasher.ProductDataHasher;
 import pl.owolny.backend.product.dto.ProductDto;
 import pl.owolny.backend.product.vo.ProductId;
@@ -17,6 +17,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductDataHasher productDataHasher;
+    private final RestClient restClient;
 
     public Product findById(ProductId productId) {
         return productRepository.findById(productId)
@@ -29,7 +30,7 @@ public class ProductService {
 
     public Product createProduct(ProductDto productDto) {
         Product product = new Product(
-                ProductId.of(productDto.id()),
+                productDto.id() != null ? ProductId.of(productDto.id()) : ProductId.generate(),
                 productDto.name(),
                 productDto.imageUrl(),
                 productDto.modelType(),
@@ -48,7 +49,12 @@ public class ProductService {
     public String generateProductHash(Product product) {
         try {
             String hash = productDataHasher.calculateProductDataHash(product);
-            product.setupBlockchainProofId("1234");
+            System.out.println("sending hash to blockchain service: " + hash);
+            String blockchainKey = restClient.get()
+                    .uri("/database/save?hash_code={hash}", hash)
+                    .retrieve()
+                    .body(String.class);
+            System.out.println("Response from blockchain service: " + blockchainKey);
             return hash;
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Hashing failed", e);
