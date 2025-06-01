@@ -1,5 +1,4 @@
 package pl.owolny.backend.recycledmaterial.vo;
-
 import pl.owolny.backend.common.BaseId;
 
 import java.util.UUID;
