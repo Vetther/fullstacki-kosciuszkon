@@ -46,17 +46,24 @@ const tabs: Tab[] = [
   },
 ]
 
-export default function Footer({ id }: { id: string }) {
-  const pathname = usePathname().split("/").at(-1)
+export default function Footer() {
+  const pathname = usePathname().split("/")
+  const id = pathname[1]
+  const href = pathname[2]
 
   return (
     <footer className="bg-bg sticky bottom-0 flex items-center justify-between px-6 py-4 text-white">
       {tabs.map(tab => (
-        <Button key={tab.name} variant="ghost" className="flex-col" asChild>
+        <Button
+          key={tab.name}
+          variant="ghost"
+          className="w-min flex-col"
+          asChild
+        >
           <Link href={`/${id}/${tab.href}`}>
-            {tab.href === pathname ? <tab.iconActive /> : <tab.iconInactive />}
+            {tab.href === href ? <tab.iconActive /> : <tab.iconInactive />}
             <span
-              className={tab.href === pathname ? "font-semibold" : "font-light"}
+              className={tab.href === href ? "font-semibold" : "font-light"}
             >
               {tab.name}
             </span>
