@@ -25,7 +25,7 @@ type Product = {
 export const productRouter = createTRPCRouter({
   getById: publicProcedure.input(z.string()).query(async ({ input }) => {
     const data = await axios.get<Product>(
-      `${process.env.BACKEND_URL}/products/${input}`,
+      `${process.env.BACKEND_URL}/products/${input ?? "00000000-0000-0000-0000-000000000000"}`,
     )
 
     return data.data

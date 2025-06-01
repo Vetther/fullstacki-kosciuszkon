@@ -16,7 +16,9 @@ export default async function Product({
 
   return (
     <div className="space-y-4">
-      <ProductImage img={product.imageUrl} alt={product.name} />
+      {product.imageUrl && (
+        <ProductImage img={product.imageUrl} alt={product.name} />
+      )}
       <Specifications
         name={product.name}
         model={product.modelType}
@@ -38,7 +40,7 @@ export default async function Product({
         <Recycling productId={id} />
         <div className="flex flex-1 flex-col space-y-4">
           <CarbonFootprint carbonFootprint={product.carbonFootprintValue} />
-          {/* <HarmfulSubstance harmfulSubstances={product.harmfulSubstances} /> */}
+          <HarmfulSubstance productId={id} />
         </div>
       </div>
     </div>
