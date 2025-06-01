@@ -1,6 +1,6 @@
 # Solana Account Backend
 
-Prosty server Flask do interakcji z bazą danych w Solanie
+Prosty serwer Flask do interakcji z bazą danych w Solanie.
 
 ## Wymagania
 
@@ -12,5 +12,7 @@ Prosty server Flask do interakcji z bazą danych w Solanie
 1. Sklonuj repozytorium:
 
    ```bash
-   git clone <adres-repozytorium>
-   cd <nazwa-folderu>
+   PROGRAM_ID = Pubkey.from_string("TWÓJ_PROGRAM_ID")
+
+Uzupełnij plik id.json własnym kluczem prywatnym w formacie JSON
+(np. eksportowanym za pomocą solana-keygen):
