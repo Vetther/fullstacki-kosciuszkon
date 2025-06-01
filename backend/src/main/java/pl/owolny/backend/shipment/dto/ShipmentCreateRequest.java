@@ -10,7 +10,7 @@ public record ShipmentCreateRequest(
         String countryTo,
         String countryToCode,
         ShipmentStatus type,
-        List<ShipmentStageCreateRequest> stages,
-        String productId
+        String productId,
+        List<ShipmentStageCreateRequest> stages
 ) {
 }
