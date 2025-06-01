@@ -9,7 +9,6 @@ export default async function HarmfulSubstance({
   productId,
 }: HarmfulSubstanceProps) {
   const substances = await api.harmfulSubstances.getByProduct(productId)
-  console.log(substances)
 
   return (
     <Card className="flex flex-col justify-center gap-4">
