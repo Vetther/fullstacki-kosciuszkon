@@ -3,7 +3,7 @@ package pl.owolny.backend.harmfulsubstances;
 import jakarta.persistence.*;
 import lombok.Getter;
 import pl.owolny.backend.harmfulsubstances.vo.HarmfulSubstanceId;
-import pl.owolny.backend.product.Product;
+import pl.owolny.backend.product.vo.ProductId;
 
 @Entity
 @Getter
@@ -15,15 +15,13 @@ public class HarmfulSubstance {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    private ProductId productId;
 
     public HarmfulSubstance() {}
 
-    public HarmfulSubstance(String name, Product product) {
+    public HarmfulSubstance(String name, ProductId productId) {
         this.id = HarmfulSubstanceId.generate();
         this.name = name;
-        this.product = product;
+        this.productId = productId;
     }
 }

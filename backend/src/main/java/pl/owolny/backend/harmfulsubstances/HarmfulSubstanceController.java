@@ -1,60 +1,49 @@
 package pl.owolny.backend.harmfulsubstances;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.owolny.backend.harmfulsubstances.dto.HarmfulSubstanceCreateRequest;
-import pl.owolny.backend.harmfulsubstances.dto.HarmfulSubstanceResponse;
+import pl.owolny.backend.harmfulsubstances.dto.HarmfulSubstanceDto;
 import pl.owolny.backend.harmfulsubstances.vo.HarmfulSubstanceId;
 import pl.owolny.backend.product.vo.ProductId;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toList;
 
+@CrossOrigin(origins = "*")
+@AllArgsConstructor
 @RestController
-@RequestMapping("/api/harmful-substances")
-@RequiredArgsConstructor
 public class HarmfulSubstanceController {
 
     private final HarmfulSubstanceService harmfulSubstanceService;
 
-    @GetMapping
-    public ResponseEntity<List<HarmfulSubstanceResponse>> getAllHarmfulSubstances() {
-        List<HarmfulSubstance> harmfulSubstances = harmfulSubstanceService.getAllHarmfulSubstances();
-        List<HarmfulSubstanceResponse> responses = harmfulSubstances.stream()
-                .map(HarmfulSubstanceResponse::fromEntity)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responses);
+    @GetMapping("/harmful-substances")
+    public ResponseEntity<List<HarmfulSubstanceDto>> getHarmfulSubstances() {
+        return ResponseEntity.ok(harmfulSubstanceService.findAll().stream()
+                .map(HarmfulSubstanceDto::fromHarmfulSubstance)
+                .collect(toList())
+        );
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<HarmfulSubstanceResponse> getHarmfulSubstanceById(@PathVariable("id") String id) {
-        HarmfulSubstance harmfulSubstance = harmfulSubstanceService.getHarmfulSubstanceById(HarmfulSubstanceId.of(id));
-        return ResponseEntity.ok(HarmfulSubstanceResponse.fromEntity(harmfulSubstance));
+    @GetMapping("/harmful-substances/{id}")
+    public ResponseEntity<HarmfulSubstanceDto> getHarmfulSubstanceById(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(HarmfulSubstanceDto.fromHarmfulSubstance(
+                harmfulSubstanceService.findById(HarmfulSubstanceId.of(id))));
     }
 
-    @GetMapping("/product/{productId}")
-    public ResponseEntity<List<HarmfulSubstanceResponse>> getHarmfulSubstancesByProductId(@PathVariable("productId") String productId) {
-        List<HarmfulSubstance> harmfulSubstances = harmfulSubstanceService.getHarmfulSubstancesByProductId(ProductId.of(productId));
-        List<HarmfulSubstanceResponse> responses = harmfulSubstances.stream()
-                .map(HarmfulSubstanceResponse::fromEntity)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responses);
+    @GetMapping("/products/{productId}/harmful-substances")
+    public ResponseEntity<List<HarmfulSubstanceDto>> getHarmfulSubstancesByProductId(
+            @PathVariable(name = "productId") String productId) {
+        return ResponseEntity.ok(harmfulSubstanceService.findByProductId(ProductId.of(productId)).stream()
+                .map(HarmfulSubstanceDto::fromHarmfulSubstance)
+                .collect(toList())
+        );
     }
 
-    @PostMapping
-    public ResponseEntity<HarmfulSubstanceResponse> createHarmfulSubstance(@RequestBody HarmfulSubstanceCreateRequest request) {
-        HarmfulSubstance createdHarmfulSubstance = harmfulSubstanceService.createHarmfulSubstance(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(HarmfulSubstanceResponse.fromEntity(createdHarmfulSubstance));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHarmfulSubstance(@PathVariable("id") String id) {
-        harmfulSubstanceService.deleteHarmfulSubstance(HarmfulSubstanceId.of(id));
-        return ResponseEntity.noContent().build();
+    @PostMapping("/harmful-substances")
+    public ResponseEntity<HarmfulSubstanceDto> createHarmfulSubstance(@RequestBody HarmfulSubstanceDto harmfulSubstanceDto) {
+        HarmfulSubstance savedHarmfulSubstance = harmfulSubstanceService.createHarmfulSubstance(harmfulSubstanceDto);
+        return ResponseEntity.ok(HarmfulSubstanceDto.fromHarmfulSubstance(savedHarmfulSubstance));
     }
 }
