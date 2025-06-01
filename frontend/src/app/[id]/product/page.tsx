@@ -1,6 +1,7 @@
 import Card from "../_components/Card"
 import { mockProduct } from "../mock"
 import ProductImage from "./_components/Image"
+import Information from "./_components/Information"
 import Specifications from "./_components/Specifications"
 import PieDonutChart from "~/components/PieDonutChart"
 import Sub from "~/components/Sub"
@@ -20,22 +21,12 @@ export default function Product() {
         dateOfInstallation={mockProduct.dateOfInstallation}
         vehicle={mockProduct.vehicle}
       />
-      <Card>
-        <h3 className="text-lg">Informacje ogólne</h3>
-        <div>
-          {[
-            mockProduct.capacity,
-            mockProduct.voltage,
-            mockProduct.weight,
-            mockProduct.size,
-          ].map(({ key, value }) => (
-            <div className="flex justify-between" key={key}>
-              <span className="text-muted-foreground">{key}</span>
-              <span>{value}</span>
-            </div>
-          ))}
-        </div>
-      </Card>
+      <Information
+        capacity={mockProduct.capacity}
+        voltage={mockProduct.voltage}
+        weight={mockProduct.weight}
+        size={mockProduct.size}
+      />
       <div className="flex gap-4">
         <Card className="flex flex-1 flex-col">
           <h3 className="text-lg">Recycling</h3>
