@@ -6,6 +6,8 @@ export default {
     extend: {
       colors: {
         bg: "var(--color-bg)",
+        tick: "var(--color-tick)",
+        "tick-text": "var(--color-tick-text)",
       },
     },
   },
