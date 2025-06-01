@@ -8,6 +8,7 @@ type SpecificationProps = {
   id: string
   producer: string
   dateOfProduction: string
+  placeOfProduction: string
   dateOfInstallation: string
   vehicle: string
 }
@@ -19,15 +20,17 @@ export default function Specifications({
   id,
   producer,
   dateOfProduction,
+  placeOfProduction,
   dateOfInstallation,
   vehicle,
 }: SpecificationProps) {
   const info = [
     { key: "Identyfikator", value: id },
-    { key: "Identyfikator", value: producer },
-    { key: "Identyfikator", value: dateOfProduction },
-    { key: "Identyfikator", value: dateOfInstallation },
-    { key: "Identyfikator", value: vehicle },
+    { key: "Producent", value: producer },
+    { key: "Data produckji", value: dateOfProduction },
+    { key: "Kraj produkcji", value: placeOfProduction },
+    { key: "Data instalacji", value: dateOfInstallation },
+    { key: "Pojazd", value: vehicle },
   ]
   return (
     <Card className="space-y-4">

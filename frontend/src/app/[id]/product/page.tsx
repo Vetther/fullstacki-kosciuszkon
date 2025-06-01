@@ -16,6 +16,7 @@ export default function Product() {
         id={mockProduct.id}
         producer={mockProduct.producer}
         dateOfProduction={mockProduct.dateOfProduction}
+        placeOfProduction={mockProduct.placeOfProduction}
         dateOfInstallation={mockProduct.dateOfInstallation}
         vehicle={mockProduct.vehicle}
       />
