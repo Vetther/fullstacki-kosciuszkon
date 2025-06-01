@@ -13,9 +13,6 @@ public class Product {
     @AttributeOverride(name = "value", column = @Column(name = "id"))
     private ProductId id;
 
-    @Column(unique = true, nullable = false)
-    private String dppId;
-
     private String imageUrl; // URL do zdjęcia produktu
 
     @Column(nullable = false)
@@ -35,15 +32,15 @@ public class Product {
     private String dimensions;      // np. "1.5m x 1m x 1.5m"
 
     private int carbonFootprintValue; // np. 40
+    private String blockchainProofId; // ID blockchain, jeśli produkt jest tokenizowany
 
     public Product() {
     }
 
-    public Product(String dppId, String name, String imageUrl, String modelType, ProductCategory productCategory,
+    public Product(ProductId productId, String name, String imageUrl, String modelType, ProductCategory productCategory,
                    ProductBaseInfo baseInfo, String nominalCapacity, String nominalVoltage, String mass,
                    String dimensions, int carbonFootprintValue) {
-        this.id = ProductId.generate();
-        this.dppId = dppId;
+        this.id = productId != null ? productId : ProductId.generate();
         this.name = name;
         this.imageUrl = imageUrl;
         this.modelType = modelType;
@@ -54,5 +51,9 @@ public class Product {
         this.mass = mass;
         this.dimensions = dimensions;
         this.carbonFootprintValue = carbonFootprintValue;
+    }
+
+    void setupBlockchainProofId(String blockchainProofId) {
+        this.blockchainProofId = blockchainProofId;
     }
 }
