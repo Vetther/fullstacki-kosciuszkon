@@ -66,7 +66,9 @@ export default function Product() {
           <ul>
             {mockProduct.materials.map(material => (
               <li key={material.name} className="flex justify-between">
-                <span className="text-muted-foreground">{material.name}</span>
+                <span className="text-muted-foreground before:pr-2 before:content-['•']">
+                  {material.name}
+                </span>
                 <span>{material.amount}%</span>
               </li>
             ))}
