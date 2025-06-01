@@ -1,37 +1,13 @@
 import Card from "../_components/Card"
+import { mockProduct } from "../mock"
 import Image from "next/image"
 import PieDonutChart from "~/components/PieDonutChart"
 import Sub from "~/components/Sub"
 import { Separator } from "~/components/ui/separator"
 
-const mockProduct = {
-  img: "/images/mock.png",
-  imgAlt: "battery",
-  name: "Bateria EV",
-  model: "CCP811 (NMC 811 Chemistry)",
-  type: "Bateria",
-  id: { key: "Identyfikator", value: "EVB-AETG-2023-07-..." },
-  producer: { key: "Producent", value: "CustomCells SE" },
-  dateOfProduction: { key: "Data produkcji", value: "2023-07-15" },
-  placeOfProduction: { key: "Kraj produkcji", value: "Francja" },
-  dateOfInstallation: { key: "Data instalacji", value: "2023-08-01" },
-  vehicle: { key: "Pojazd", value: "Audi e-tron GT (2023)" },
-  capacity: { key: "Pojemność nominalna", value: "50 Ah" },
-  voltage: { key: "Napięcie nominalne", value: "20 V" },
-  weight: { key: "Masa baterii", value: "51 g" },
-  size: { key: "Wymiary baterii", value: "1.5m x 1m x 1.5m" },
-  materials: [
-    { name: "Lit", amount: 2 },
-    { name: "Kobalt", amount: 3 },
-    { name: "Nikiel", amount: 1 },
-  ],
-  carbonFootprint: 40,
-  harmfulSubstances: ["Ni"],
-}
-
 export default function Product() {
   return (
-    <div className="space-y-4 p-4">
+    <div className="space-y-4">
       <Card className="relative aspect-[4/3]">
         <Image
           src={mockProduct.img}
