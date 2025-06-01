@@ -2,7 +2,7 @@ package pl.owolny.backend.recycledmaterial;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import pl.owolny.backend.product.Product;
+import pl.owolny.backend.product.vo.ProductId;
 import pl.owolny.backend.recycledmaterial.vo.RecycledMaterialId;
 
 @Getter
@@ -17,17 +17,15 @@ public class RecycledMaterial {
 
     private int quantityPercentage;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    private ProductId productId;
 
     public RecycledMaterial() {
     }
 
-    public RecycledMaterial(String name, int quantityPercentage, Product product) {
+    public RecycledMaterial(String name, int quantityPercentage, ProductId productId) {
         this.id = RecycledMaterialId.generate();
         this.name = name;
         this.quantityPercentage = quantityPercentage;
-        this.product = product;
+        this.productId = productId;
     }
 }

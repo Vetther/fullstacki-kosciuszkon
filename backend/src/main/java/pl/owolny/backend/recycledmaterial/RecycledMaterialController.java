@@ -1,61 +1,49 @@
 package pl.owolny.backend.recycledmaterial;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.owolny.backend.product.vo.ProductId;
-import pl.owolny.backend.recycledmaterial.dto.RecycledMaterialCreateRequest;
-import pl.owolny.backend.recycledmaterial.dto.RecycledMaterialResponse;
-import pl.owolny.backend.recycledmaterial.dto.RecycledMaterialUpdateRequest;
+import pl.owolny.backend.recycledmaterial.dto.RecycledMaterialDto;
 import pl.owolny.backend.recycledmaterial.vo.RecycledMaterialId;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toList;
 
+@CrossOrigin(origins = "*")
+@AllArgsConstructor
 @RestController
-@RequestMapping("/api/recycled-materials")
-@RequiredArgsConstructor
 public class RecycledMaterialController {
 
     private final RecycledMaterialService recycledMaterialService;
 
-    @GetMapping
-    public ResponseEntity<List<RecycledMaterialResponse>> getAllRecycledMaterials() {
-        List<RecycledMaterial> recycledMaterials = recycledMaterialService.getAllRecycledMaterials();
-        List<RecycledMaterialResponse> responses = recycledMaterials.stream()
-                .map(RecycledMaterialResponse::fromEntity)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responses);
+    @GetMapping("/recycled-materials")
+    public ResponseEntity<List<RecycledMaterialDto>> getRecycledMaterials() {
+        return ResponseEntity.ok(recycledMaterialService.findAll().stream()
+                .map(RecycledMaterialDto::fromRecycledMaterial)
+                .collect(toList())
+        );
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RecycledMaterialResponse> getRecycledMaterialById(@PathVariable("id") String id) {
-        RecycledMaterial recycledMaterial = recycledMaterialService.getRecycledMaterialById(RecycledMaterialId.of(id));
-        return ResponseEntity.ok(RecycledMaterialResponse.fromEntity(recycledMaterial));
+    @GetMapping("/recycled-materials/{id}")
+    public ResponseEntity<RecycledMaterialDto> getRecycledMaterialById(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(RecycledMaterialDto.fromRecycledMaterial(
+                recycledMaterialService.findById(RecycledMaterialId.of(id))));
     }
 
-    @GetMapping("/product/{productId}")
-    public ResponseEntity<List<RecycledMaterialResponse>> getRecycledMaterialsByProductId(@PathVariable("productId") String productId) {
-        List<RecycledMaterial> recycledMaterials = recycledMaterialService.getRecycledMaterialsByProductId(ProductId.of(productId));
-        List<RecycledMaterialResponse> responses = recycledMaterials.stream()
-                .map(RecycledMaterialResponse::fromEntity)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responses);
+    @GetMapping("/products/{productId}/recycled-materials")
+    public ResponseEntity<List<RecycledMaterialDto>> getRecycledMaterialsByProductId(
+            @PathVariable(name = "productId") String productId) {
+        return ResponseEntity.ok(recycledMaterialService.findByProductId(ProductId.of(productId)).stream()
+                .map(RecycledMaterialDto::fromRecycledMaterial)
+                .collect(toList())
+        );
     }
 
-    @PostMapping
-    public ResponseEntity<RecycledMaterialResponse> createRecycledMaterial(@RequestBody RecycledMaterialCreateRequest request) {
-        RecycledMaterial createdRecycledMaterial = recycledMaterialService.createRecycledMaterial(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(RecycledMaterialResponse.fromEntity(createdRecycledMaterial));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRecycledMaterial(@PathVariable("id") String id) {
-        recycledMaterialService.deleteRecycledMaterial(RecycledMaterialId.of(id));
-        return ResponseEntity.noContent().build();
+    @PostMapping("/recycled-materials")
+    public ResponseEntity<RecycledMaterialDto> createRecycledMaterial(@RequestBody RecycledMaterialDto recycledMaterialDto) {
+        RecycledMaterial savedRecycledMaterial = recycledMaterialService.createRecycledMaterial(recycledMaterialDto);
+        return ResponseEntity.ok(RecycledMaterialDto.fromRecycledMaterial(savedRecycledMaterial));
     }
 }
