@@ -15,7 +15,7 @@ export default function Cycle() {
         Znajdź najbliższy punkt zbiórki
       </Button>
       <Button className="py-6">Zgłoś baterię do utylizacji</Button>
-      <div className="relative">
+      <div className="relative aspect-square">
         <Image src="/images/PL.png" alt="PL" fill className="object-contain" />
       </div>
     </div>
