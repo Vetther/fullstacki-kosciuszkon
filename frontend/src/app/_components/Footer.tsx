@@ -57,7 +57,7 @@ export default function Footer() {
         <Button
           key={tab.name}
           variant="ghost"
-          className="w-min flex-col"
+          className="hover:bg-tick w-min flex-col py-6 hover:text-white"
           asChild
         >
           <Link href={`/${id}/${tab.href}`}>
