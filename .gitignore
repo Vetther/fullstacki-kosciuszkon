@@ -37,3 +37,6 @@ out/
 
 ### VS Code ###
 .vscode/
+.id.json
+__pycache__/
+node_modules/

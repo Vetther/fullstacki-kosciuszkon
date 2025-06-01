@@ -7,14 +7,6 @@ type StatusProps = {
   productId: string
 }
 
-// const stages = [
-//   "W przygotowaniu", // PREPARING
-//   "Oczekuje na odbiór",  // READY_FOR_PICKUP
-//   "W drodze", //
-//   "Dostarczono do magazynu", // DELIVERED
-//   "Dostarczono do klienta", // RETURNED
-// ]
-
 const stages = [
   { status: "PREPARING", description: "W przygotowaniu" },
   { status: "READY_FOR_PICKUP", description: "Oczekuje na odbiór" },
