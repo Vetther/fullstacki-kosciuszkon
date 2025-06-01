@@ -1,42 +1,24 @@
 import Card from "../_components/Card"
 import { mockProduct } from "../mock"
 import ProductImage from "./_components/Image"
+import Specifications from "./_components/Specifications"
 import PieDonutChart from "~/components/PieDonutChart"
 import Sub from "~/components/Sub"
-import { Separator } from "~/components/ui/separator"
 
 export default function Product() {
   return (
     <div className="space-y-4">
       <ProductImage img={mockProduct.img} alt={mockProduct.imgAlt} />
-      <Card className="space-y-4">
-        <div className="flex justify-between">
-          <div>
-            <h3 className="text-lg font-semibold">{mockProduct.name}</h3>
-            <span className="text-muted-foreground text-sm">
-              {mockProduct.model}
-            </span>
-          </div>
-          <span className="h-min rounded-md bg-[#CFDCE1] p-1.5 text-sm">
-            {mockProduct.type}
-          </span>
-        </div>
-        <Separator />
-        <div>
-          {[
-            mockProduct.id,
-            mockProduct.producer,
-            mockProduct.dateOfProduction,
-            mockProduct.dateOfInstallation,
-            mockProduct.vehicle,
-          ].map(({ key, value }) => (
-            <div className="flex justify-between" key={key}>
-              <span className="text-muted-foreground">{key}</span>
-              <span>{value}</span>
-            </div>
-          ))}
-        </div>
-      </Card>
+      <Specifications
+        name={mockProduct.name}
+        model={mockProduct.name}
+        type={mockProduct.type}
+        id={mockProduct.id}
+        producer={mockProduct.producer}
+        dateOfProduction={mockProduct.dateOfProduction}
+        dateOfInstallation={mockProduct.dateOfInstallation}
+        vehicle={mockProduct.vehicle}
+      />
       <Card>
         <h3 className="text-lg">Informacje ogólne</h3>
         <div>
