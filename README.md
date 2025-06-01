@@ -1,4 +1,9 @@
 ![image](https://github.com/user-attachments/assets/4bbb930a-5758-4dd0-bab1-afc015638755)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/23b552ac-2df3-4585-83fe-f1386e24aa13" width="300" />
+  <img src="https://github.com/user-attachments/assets/cc50125b-cbb4-4ea3-8934-f999c6b62263" width="300" />
+</p>
+
 ```mermaid
 graph TB
     subgraph "Frontend Layer"
