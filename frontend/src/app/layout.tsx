@@ -7,14 +7,17 @@ import { TRPCReactProvider } from "~/trpc/react"
 
 export const metadata: Metadata = {}
 
-export default function RootLayout({ children }: Children) {
+export default function RootLayout({
+  children,
+  params,
+}: Children & { params: { id: string } }) {
   return (
     <html lang="en">
       <body className="bg-bg">
         <TRPCReactProvider>
           <Navbar />
           <Main>{children}</Main>
-          <Footer />
+          <Footer id={params.id} />
         </TRPCReactProvider>
       </body>
     </html>

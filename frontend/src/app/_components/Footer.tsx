@@ -13,6 +13,7 @@ type Tab = {
   iconInactive: IconType
   iconActive: IconType
   name: string
+  href: string
 }
 
 const tabs: Tab[] = [
@@ -20,30 +21,34 @@ const tabs: Tab[] = [
     iconInactive: IoHomeOutline,
     iconActive: IoHomeSharp,
     name: "Produkt",
+    href: "product",
   },
   {
     iconInactive: FaRegBell,
     iconActive: FaBell,
     name: "Analiza",
+    href: "analysis",
   },
   {
     iconInactive: FaRegHeart,
     iconActive: FaHeart,
     name: "Cykl Życia",
+    href: "cycle",
   },
   {
     iconInactive: IoBagOutline,
     iconActive: IoBag,
     name: "Home",
+    href: "home",
   },
 ]
 
-export default function Footer() {
+export default function Footer({ id }: { id: string }) {
   return (
     <footer className="bg-bg sticky bottom-0 flex items-center justify-between px-6 py-4 text-white">
       {tabs.map(tab => (
         <Button key={tab.name} variant="ghost" className="flex-col" asChild>
-          <Link href="/">
+          <Link href={`/${id}/${tab.href}`}>
             {tab.name === "Produkt" ? <tab.iconActive /> : <tab.iconInactive />}
             <span
               className={
