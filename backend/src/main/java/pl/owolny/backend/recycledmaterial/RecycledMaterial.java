@@ -1,11 +1,11 @@
 package pl.owolny.backend.recycledmaterial;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import lombok.Getter;
+import pl.owolny.backend.product.Product;
 import pl.owolny.backend.recycledmaterial.vo.RecycledMaterialId;
 
+@Getter
 @Entity
 public class RecycledMaterial {
 
@@ -16,4 +16,18 @@ public class RecycledMaterial {
     private String name;
 
     private int quantityPercentage;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
+
+    public RecycledMaterial() {
+    }
+
+    public RecycledMaterial(String name, int quantityPercentage, Product product) {
+        this.id = RecycledMaterialId.generate();
+        this.name = name;
+        this.quantityPercentage = quantityPercentage;
+        this.product = product;
+    }
 }

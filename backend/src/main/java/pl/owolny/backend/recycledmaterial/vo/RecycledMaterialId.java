@@ -1,7 +1,6 @@
 package pl.owolny.backend.recycledmaterial.vo;
 
 import pl.owolny.backend.common.BaseId;
-import pl.owolny.backend.shipment.vo.ShipmentId;
 
 import java.util.UUID;
 
