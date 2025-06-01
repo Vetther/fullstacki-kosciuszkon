@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestClient;
 import pl.owolny.backend.harmfulsubstances.HarmfulSubstanceService;
 import pl.owolny.backend.harmfulsubstances.dto.HarmfulSubstanceDto;
 import pl.owolny.backend.product.Product;
@@ -83,9 +84,16 @@ public class BackendApplication {
                             new ShipmentStageCreateRequest("Stage 3", "desc")
                     )
             ));
-            String hash = productService.generateProductHash(product);
-            System.out.println("Product created with ID: " + product.getId().getValue() + ", Hash: " + hash);
+//            String hash = productService.generateProductHash(product);
+//            System.out.println("Product created with ID: " + product.getId().getValue() + ", Hash: " + hash);
         };
+    }
+
+    @Bean
+    RestClient restClient() {
+        return RestClient.builder()
+                .baseUrl("http://10.1.1.83:5000")
+                .build();
     }
 
     public static void main(String[] args) {
