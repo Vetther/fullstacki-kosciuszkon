@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { FaBell, FaHeart, FaRegBell, FaRegHeart } from "react-icons/fa6"
 import {
   IoBag,
@@ -44,16 +47,16 @@ const tabs: Tab[] = [
 ]
 
 export default function Footer({ id }: { id: string }) {
+  const pathname = usePathname().split("/").at(-1)
+
   return (
     <footer className="bg-bg sticky bottom-0 flex items-center justify-between px-6 py-4 text-white">
       {tabs.map(tab => (
         <Button key={tab.name} variant="ghost" className="flex-col" asChild>
           <Link href={`/${id}/${tab.href}`}>
-            {tab.name === "Produkt" ? <tab.iconActive /> : <tab.iconInactive />}
+            {tab.href === pathname ? <tab.iconActive /> : <tab.iconInactive />}
             <span
-              className={
-                tab.name === "Produkt" ? "font-semibold" : "font-light"
-              }
+              className={tab.href === pathname ? "font-semibold" : "font-light"}
             >
               {tab.name}
             </span>
