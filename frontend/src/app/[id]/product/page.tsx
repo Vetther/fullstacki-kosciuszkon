@@ -2,8 +2,8 @@ import Card from "../_components/Card"
 import { mockProduct } from "../mock"
 import ProductImage from "./_components/Image"
 import Information from "./_components/Information"
+import Recycling from "./_components/Recycling"
 import Specifications from "./_components/Specifications"
-import PieDonutChart from "~/components/PieDonutChart"
 import Sub from "~/components/Sub"
 
 export default function Product() {
@@ -28,44 +28,7 @@ export default function Product() {
         size={mockProduct.size}
       />
       <div className="flex gap-4">
-        <Card className="flex flex-1 flex-col">
-          <h3 className="text-lg">Recycling</h3>
-          <ul>
-            {mockProduct.materials.map(material => (
-              <li key={material.name} className="flex justify-between">
-                <span className="text-muted-foreground before:pr-2 before:content-['•']">
-                  {material.name}
-                </span>
-                <span>{material.amount}%</span>
-              </li>
-            ))}
-          </ul>
-          <div className="grid flex-1 place-items-center">
-            <PieDonutChart
-              config={{
-                lit: {
-                  label: "Lit",
-                  color: "#A8D1D3",
-                },
-                kobalt: {
-                  label: "Kobalt",
-                  color: "#CEA8D3",
-                },
-                nikiel: {
-                  label: "Nikiel",
-                  color: "#D3A8A9",
-                },
-              }}
-              data={[
-                { substance: "lit", amount: 2, fill: "#A8D1D3" },
-                { substance: "kobalt", amount: 3, fill: "#CEA8D3" },
-                { substance: "nikiel", amount: 1, fill: "#D3A8A9" },
-              ]}
-              dataKey="amount"
-              nameKey="substance"
-            />
-          </div>
-        </Card>
+        <Recycling materials={mockProduct.materials} />
         <div className="flex flex-1 flex-col space-y-4">
           <Card className="flex flex-col justify-center gap-4">
             <h3 className="text-center">
