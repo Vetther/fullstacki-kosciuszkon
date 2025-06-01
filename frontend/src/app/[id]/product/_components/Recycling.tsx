@@ -1,47 +1,64 @@
 import Card from "../../_components/Card"
 import PieDonutChart from "~/components/PieDonutChart"
+import { api } from "~/trpc/server"
 
 type RecyclingProps = {
-  materials: { name: string; amount: number }[]
+  productId: string
 }
 
-export default function Recycling({ materials }: RecyclingProps) {
+export default async function Recycling({ productId }: RecyclingProps) {
+  const materials = await api.recycledMaterials.getByProduct(productId)
+
+  function getRandomColor() {
+    return `#${Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, "0")}`
+  }
+
+  const colors = materials.reduce<Record<string, string>>((acc, curr) => {
+    acc[curr.name] = getRandomColor()
+    return acc
+  }, {})
+
+  const config = Object.entries(colors).reduce(
+    (acc, [name, color]) => {
+      acc[name.toLowerCase()] = {
+        label: name,
+        color,
+      }
+      return acc
+    },
+    {} as Record<string, { label: string; color: string }>,
+  )
+
+  const chartData = materials.map(material => ({
+    material: material.name.toLowerCase(),
+    amount: material.quantityPercentage,
+    fill: colors[material.name] ?? getRandomColor(),
+  }))
+
   return (
     <Card className="flex flex-1 flex-col">
       <h3 className="text-lg">Recycling</h3>
       <ul>
         {materials.map(material => (
           <li key={material.name} className="flex justify-between">
-            <span className="text-muted-foreground before:pr-2 before:content-['•']">
+            <span
+              className="text-muted-foreground pl-4"
+              style={{ color: colors[material.name] }}
+            >
               {material.name}
             </span>
-            <span>{material.amount}%</span>
+            <span>{material.quantityPercentage}%</span>
           </li>
         ))}
       </ul>
       <div className="grid flex-1 place-items-center">
         <PieDonutChart
-          config={{
-            lit: {
-              label: "Lit",
-              color: "#A8D1D3",
-            },
-            kobalt: {
-              label: "Kobalt",
-              color: "#CEA8D3",
-            },
-            nikiel: {
-              label: "Nikiel",
-              color: "#D3A8A9",
-            },
-          }}
-          data={[
-            { substance: "lit", amount: 2, fill: "#A8D1D3" },
-            { substance: "kobalt", amount: 3, fill: "#CEA8D3" },
-            { substance: "nikiel", amount: 1, fill: "#D3A8A9" },
-          ]}
+          config={config}
+          data={chartData}
           dataKey="amount"
-          nameKey="substance"
+          nameKey="material"
         />
       </div>
     </Card>

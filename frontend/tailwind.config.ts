@@ -8,6 +8,7 @@ export default {
         bg: "var(--color-bg)",
         tick: "var(--color-tick)",
         "tick-text": "var(--color-tick-text)",
+        "tick-hover": "var(--color-tick-hover)",
       },
     },
   },

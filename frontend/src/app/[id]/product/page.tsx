@@ -1,37 +1,44 @@
-import { mockProduct } from "../mock"
 import CarbonFootprint from "./_components/CarbonFootprint"
 import HarmfulSubstance from "./_components/HarmfulSubstance"
 import ProductImage from "./_components/Image"
 import Information from "./_components/Information"
 import Recycling from "./_components/Recycling"
 import Specifications from "./_components/Specifications"
+import { api } from "~/trpc/server"
 
-export default function Product() {
+export default async function Product({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const product = await api.product.getById(id)
+
   return (
     <div className="space-y-4">
-      <ProductImage img={mockProduct.img} alt={mockProduct.imgAlt} />
+      <ProductImage img={product.imageUrl} alt={product.name} />
       <Specifications
-        name={mockProduct.name}
-        model={mockProduct.name}
-        type={mockProduct.type}
-        id={mockProduct.id}
-        producer={mockProduct.producer}
-        dateOfProduction={mockProduct.dateOfProduction}
-        placeOfProduction={mockProduct.placeOfProduction}
-        dateOfInstallation={mockProduct.dateOfInstallation}
-        vehicle={mockProduct.vehicle}
+        name={product.name}
+        model={product.modelType}
+        category={product.productCategory}
+        id={product.id}
+        manufacturer={product.baseInfo.manufacturer}
+        dateOfProduction={product.baseInfo.productionDate}
+        placeOfProduction={product.baseInfo.productionCountry}
+        dateOfInstallation={product.baseInfo.installationDate}
+        vehicle={product.baseInfo.vehicleInfo}
       />
       <Information
-        capacity={mockProduct.capacity}
-        voltage={mockProduct.voltage}
-        weight={mockProduct.weight}
-        size={mockProduct.size}
+        capacity={product.nominalCapacity}
+        voltage={product.nominalVoltage}
+        mass={product.mass}
+        dimensions={product.dimensions}
       />
       <div className="flex gap-4">
-        <Recycling materials={mockProduct.materials} />
+        <Recycling productId={id} />
         <div className="flex flex-1 flex-col space-y-4">
-          <CarbonFootprint carbonFootprint={mockProduct.carbonFootprint} />
-          <HarmfulSubstance harmfulSubstances={mockProduct.harmfulSubstances} />
+          <CarbonFootprint carbonFootprint={product.carbonFootprintValue} />
+          {/* <HarmfulSubstance harmfulSubstances={product.harmfulSubstances} /> */}
         </div>
       </div>
     </div>
