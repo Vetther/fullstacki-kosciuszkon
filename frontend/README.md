@@ -1,29 +1,72 @@
-# Create T3 App
+# Battery Tracker
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Aplikacja Next.js służąca do śledzenia produktów bateryjnych przez cały ich cykl życia z wykorzystaniem kodów QR. Aplikacja dostarcza kompleksowych informacji o bateriach, umożliwia śledzenie dostaw oraz zarządzanie cyklem życia produktu.
 
-## What's next? How do I make an app with this?
+## Funkcje
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **Nawigacja przez kod QR** – użytkownik skanuje kod QR i trafia bezpośrednio na stronę produktu
+- **Informacje o produkcie** – specyfikacja baterii, skład materiałowy, ślad węglowy oraz substancje niebezpieczne
+- **Analiza dostawy** – status dostawy w czasie rzeczywistym oraz śledzenie etapów w łańcuchu dostaw
+- **Cykl życia** – monitoring kondycji i statusu cyklu życia baterii
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Stos technologiczny
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- **Framework**: Next.js (App Router)
+- **Typowanie**: TypeScript
+- **API**: tRPC
+- **Baza danych**: Prisma ORM
+- **Uwierzytelnianie**: NextAuth.js
+- **Stylowanie**: Tailwind CSS
+- **Komponenty UI**: shadcn/ui
+- **Narzędzie startowe**: create-t3-app
 
-## Learn More
+## Struktura aplikacji
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Aplikacja opiera się na trzech trasach dostępnych po zeskanowaniu kodu QR:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Trasy
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+```
+/[id]/product   - informacje o produkcie
+/[id]/analysis  - analiza dostawy i łańcucha dostaw
+/[id]/cycle     - stan i cykl życia baterii
+```
 
-## How do I deploy this?
+### Kluczowe strony
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- **Produkt** (`/[id]/product`)
+
+  - Dane techniczne baterii
+  - Skład materiałowy
+  - Ślad węglowy
+  - Substancje niebezpieczne
+
+- **Analiza** (`/[id]/analysis`)
+
+  - Status dostawy
+  - Etapy łańcucha dostaw
+
+- **Cykl Życia** (`/[id]/cycle`)
+  - Status cyklu życia
+  - Kondycja baterii
+
+### Wymagania
+
+- Node.js 18+
+- npm/yarn/pnpm/bun
+- Baza danych (zalecane PostgreSQL)
+
+### Użycie
+
+1. Skanuj kod QR zawierający identyfikator produktu
+2. Zostaniesz przekierowany na `/[id]/product`
+3. Możesz przechodzić między zakładkami: produkt, analiza, cykl
+4. Aplikacja automatycznie pobiera dane z API za pomocą tRPC
+
+## API
+
+Aplikacja używa tRPC do obsługi zapytań:
+
+- **Router Produktu** – informacje o produkcie
+- **Router Analizy** – dane o dostawie i etapach
+- **Router Cyklu** – dane o cyklu życia i kondycji baterii
