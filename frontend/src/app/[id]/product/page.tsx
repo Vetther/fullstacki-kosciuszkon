@@ -1,10 +1,10 @@
 import Card from "../_components/Card"
 import { mockProduct } from "../mock"
+import CarbonFootprint from "./_components/CarbonFootprint"
 import ProductImage from "./_components/Image"
 import Information from "./_components/Information"
 import Recycling from "./_components/Recycling"
 import Specifications from "./_components/Specifications"
-import Sub from "~/components/Sub"
 
 export default function Product() {
   return (
@@ -30,14 +30,7 @@ export default function Product() {
       <div className="flex gap-4">
         <Recycling materials={mockProduct.materials} />
         <div className="flex flex-1 flex-col space-y-4">
-          <Card className="flex flex-col justify-center gap-4">
-            <h3 className="text-center">
-              Ślad węglowy (CO<Sub>2</Sub>)
-            </h3>
-            <span className="w-full text-center text-2xl">
-              {mockProduct.carbonFootprint} CO<Sub>2</Sub>e
-            </span>
-          </Card>
+          <CarbonFootprint carbonFootprint={mockProduct.carbonFootprint} />
           <Card className="flex flex-col justify-center gap-4">
             <h3 className="text-center">
               Zawartość substancji niebezpiecznych
