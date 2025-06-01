@@ -5,8 +5,16 @@ import ProductImage from "./_components/Image"
 import Information from "./_components/Information"
 import Recycling from "./_components/Recycling"
 import Specifications from "./_components/Specifications"
+import { api } from "~/trpc/server"
 
-export default function Product() {
+export default async function Product({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const product = await api.product.getById(id)
+
   return (
     <div className="space-y-4">
       <ProductImage img={mockProduct.img} alt={mockProduct.imgAlt} />
