@@ -21,9 +21,9 @@ export default function Information({
   ]
 
   return (
-    <Card>
+    <Card className="space-y-4">
       <h3 className="text-lg">Informacje ogólne</h3>
-      <div>
+      <div className="space-y-2">
         {info.map(({ key, value }) => (
           <div className="flex justify-between" key={key}>
             <span className="text-muted-foreground">{key}</span>

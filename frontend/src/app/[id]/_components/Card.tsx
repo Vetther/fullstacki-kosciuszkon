@@ -3,9 +3,10 @@ import { cn } from "~/lib/utils"
 export default function Card({
   children,
   className,
-}: Children & { className?: string }) {
+  ...props
+}: React.ComponentProps<"div">) {
   return (
-    <div className={cn("flex-1 rounded-md bg-white p-4", className)}>
+    <div {...props} className={cn("flex-1 rounded-md bg-white p-4", className)}>
       {children}
     </div>
   )

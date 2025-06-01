@@ -44,7 +44,7 @@ export default function Specifications({
         </span>
       </div>
       <Separator />
-      <div>
+      <div className="space-y-2">
         {info.map(({ key, value }) => (
           <div className="flex justify-between" key={key}>
             <span className="text-muted-foreground">{key}</span>

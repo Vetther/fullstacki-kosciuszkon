@@ -3,7 +3,7 @@ import Battery from "./_components/Battery"
 
 export default function Cycle() {
   return (
-    <div>
+    <div className="space-y-4">
       <Battery
         capacity={mockProduct.capacity}
         currentCapacity={mockProduct.currentCapacity}
