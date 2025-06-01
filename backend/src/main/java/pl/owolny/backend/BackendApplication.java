@@ -48,7 +48,7 @@ public class BackendApplication {
         return args -> {
             Product product = productService.createProduct(new ProductDto(
                     "00000000-0000-0000-0000-000000000000",
-                    "https://example.com/image.jpg",
+                    "https://cdn.discordapp.com/attachments/1378296266286567476/1378663596610818069/image_8.png?ex=683d6c07&is=683c1a87&hm=dd2827e7be3d1dd69bce1b2e2ae153390dc9a48b551e2d3ea45729a9ce1b99cd&",
                     "Example Product",
                     "Model X",
                     ProductCategory.BATTERY,
