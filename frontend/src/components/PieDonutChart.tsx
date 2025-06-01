@@ -27,7 +27,7 @@ export default function PieDonutChart<
   TName extends string,
 >({ config, data, dataKey, nameKey }: PieDonutChartType<TData, TName>) {
   return (
-    <ChartContainer config={config}>
+    <ChartContainer config={config} className="aspect-square w-full">
       <ResponsiveContainer>
         <PieChart>
           <ChartTooltip
@@ -38,7 +38,7 @@ export default function PieDonutChart<
             data={data}
             dataKey={dataKey}
             nameKey={nameKey}
-            innerRadius={20}
+            innerRadius={25}
           />
         </PieChart>
       </ResponsiveContainer>

@@ -61,7 +61,7 @@ export default function Product() {
         </div>
       </Card>
       <div className="flex gap-4">
-        <Card className="flex-1">
+        <Card className="flex flex-1 flex-col">
           <h3 className="text-lg">Recycling</h3>
           <ul>
             {mockProduct.materials.map(material => (
@@ -71,29 +71,31 @@ export default function Product() {
               </li>
             ))}
           </ul>
-          <PieDonutChart
-            config={{
-              lit: {
-                label: "Lit",
-                color: "#A8D1D3",
-              },
-              kobalt: {
-                label: "Kobalt",
-                color: "#CEA8D3",
-              },
-              nikiel: {
-                label: "Nikiel",
-                color: "#D3A8A9",
-              },
-            }}
-            data={[
-              { substance: "lit", amount: 2, fill: "#A8D1D3" },
-              { substance: "kobalt", amount: 3, fill: "#CEA8D3" },
-              { substance: "nikiel", amount: 1, fill: "#D3A8A9" },
-            ]}
-            dataKey="amount"
-            nameKey="substance"
-          />
+          <div className="grid flex-1 place-items-center">
+            <PieDonutChart
+              config={{
+                lit: {
+                  label: "Lit",
+                  color: "#A8D1D3",
+                },
+                kobalt: {
+                  label: "Kobalt",
+                  color: "#CEA8D3",
+                },
+                nikiel: {
+                  label: "Nikiel",
+                  color: "#D3A8A9",
+                },
+              }}
+              data={[
+                { substance: "lit", amount: 2, fill: "#A8D1D3" },
+                { substance: "kobalt", amount: 3, fill: "#CEA8D3" },
+                { substance: "nikiel", amount: 1, fill: "#D3A8A9" },
+              ]}
+              dataKey="amount"
+              nameKey="substance"
+            />
+          </div>
         </Card>
         <div className="flex flex-1 flex-col space-y-4">
           <Card className="flex flex-col justify-center gap-4">
