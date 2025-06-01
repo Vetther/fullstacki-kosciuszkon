@@ -14,7 +14,11 @@ export default function Status({ currentStage, stages }: StatusProps) {
       <ul className="space-y-2">
         {stages.map((stage, i) => (
           <li key={i} className="flex items-center justify-between">
-            <span className="text-muted-foreground">{stage}</span>
+            <span
+              className={i === currentStage ? "text-black" : "text-tick-text"}
+            >
+              {stage}
+            </span>
             {i <= currentStage && (
               <span className="p-1">
                 <TiTick
